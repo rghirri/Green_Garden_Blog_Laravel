@@ -85,11 +85,23 @@
                 <a href="">Articles</a>
               </li>
               <li class="list-group-item">
-                <a href="">Categories</a>
+                <a href="{{ route('categories.index') }}">Categories</a>
               </li>
             </ul>
           </div>
           <div class="col-md-8">
+            <!-- Flash message start -->
+            @if(session()->has('success'))
+            <div class="alert alert-success">
+              {{ session()->get('success') }}
+            </div>
+            @endif
+            @if(session()->has('error'))
+            <div class="alert alert-danger">
+              {{ session()->get('error') }}
+            </div>
+            @endif
+            <!-- Flash message end -->
             @yield('content')
           </div>
         </div>

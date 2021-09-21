@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('content');
-            $table->timestamps('published_at')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->string('image_file_list')->nullable();
             $table->string('image_file_banner')->nullable();
             $table->timestamps();
