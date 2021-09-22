@@ -46,7 +46,7 @@ class CategoriesController extends Controller
         ]);
 
         // Add flash message
-        session()->flash('success', 'Category Added Successfuly');
+        session()->flash('success', "Category $request->name Added Successfuly");
 
         // Redirect page
         return redirect(route('categories.index'));
@@ -102,8 +102,19 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+         // Delete category from database
+         $category->delete();
+
+         // store category name is session variable
+
+        // $category_name = session()->put('category_name', 'cooking');
+
+        // Add flash message
+        session()->flash('success', "Category $category->name was deleted successfully");
+
+        // Redirect page
+        return redirect(route('categories.index'));
     }
 }
