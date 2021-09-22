@@ -15,7 +15,8 @@
           <th>Title</th>
           <th>Content</th>
           <th>Category</th>
-          <th>image</th>
+          <th>image list</th>
+          <th>image banner</th>
           <th>Publish Status</th>
           <th></th>
           <th></th>
@@ -25,16 +26,19 @@
         @foreach($articles as $article)
         <tr>
           <td>
-            {{ $article->name }}
+            {{ $article->title }}
           </td>
           <td>
-            {{ $article->content }}
+            {!! $article->content !!}
           </td>
           <td>
             Category
           </td>
           <td>
-            <img src="{{ $article->image }}" alt="">
+            <img src="{{ asset("/storage/".$article->image_list) }}" alt="">
+          </td>
+          <td>
+            <img src="{{ asset("/storage/".$article->image_banner) }}" alt="">
           </td>
           <td>
             Publish Status button

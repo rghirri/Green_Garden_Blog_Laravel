@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Requests\Articles\CreateArticleRequest;
+
 use App\Article;
 
 class ArticlesController extends Controller
@@ -34,9 +36,25 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateArticleRequest $request)
     {
-        //
+        // upload the image to storage
+        //dd($request->image_file_list);
+        //dd($request->image_file_banner);
+        $image_list = $request->image_file_list->store('articles/list');
+        $image_banner = $request->image_file_banner->store('articles/banner');
+        // create the article
+        Article::create([
+            'title'         =>  $request->title,
+            'content'       =>  $request->content,
+            'image_list'    =>  $image_list,
+            'image_list'    =>  $image_banner,
+            'published_at'  =>  $request->published_at
+        ]);
+        // flash message
+        session()->flash('success', "Article $request->title created successfully");
+        // redirect user
+        return redirect(route('articles.index'));
     }
 
     /**

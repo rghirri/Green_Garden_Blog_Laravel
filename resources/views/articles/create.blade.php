@@ -37,8 +37,8 @@
       </div>
       @endif
       <div class="form-group">
-        <label for="image">Image List</label>
-        <input type="file" class="form-control" name="image" id="image">
+        <label for="image_file_list">Image List</label>
+        <input type="file" class="form-control" name="image_file_list" id="image_file_list">
       </div>
       <!-- Display Image banner -->
       @if(isset($article))
@@ -47,8 +47,8 @@
       </div>
       @endif
       <div class="form-group">
-        <label for="image">Image Banner</label>
-        <input type="file" class="form-control" name="image" id="image">
+        <label for="image_file_banner">Image Banner</label>
+        <input type="file" class="form-control" name="image_file_banner" id="image_file_banner">
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-success">
