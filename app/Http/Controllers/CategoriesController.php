@@ -107,7 +107,7 @@ class CategoriesController extends Controller
          // Delete category from database
          $category->delete();
 
-         // store category name is session variable
+         // Store category name is session variable
 
         // $category_name = session()->put('category_name', 'cooking');
 
