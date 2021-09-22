@@ -12,11 +12,10 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Content</th>
-          <th>Category</th>
           <th>image list</th>
           <th>image banner</th>
+          <th>Title</th>
+          <th>Category</th>
           <th>Publish Status</th>
           <th></th>
           <th></th>
@@ -26,28 +25,46 @@
         @foreach($articles as $article)
         <tr>
           <td>
-            {{ $article->title }}
+            <div class="zoom">
+              <img src="{{ asset("/storage/".$article->image_list) }}" width="100" class="img-fluid" alt="">
+            </div>
+
           </td>
           <td>
-            {!! $article->content !!}
+            <div class="zoom">
+              <img src="{{ asset("/storage/".$article->image_banner) }}" width="100" class="img-fluid" alt="">
+            </div>
+          </td>
+          <td>
+            {{ $article->title }}
           </td>
           <td>
             Category
           </td>
           <td>
-            <img src="{{ asset("/storage/".$article->image_list) }}" alt="">
-          </td>
-          <td>
-            <img src="{{ asset("/storage/".$article->image_banner) }}" alt="">
-          </td>
-          <td>
             Publish Status button
           </td>
           <td>
-            <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-info btn-sm">Edit</a>
+            @if($article->trashed())
+          <td>
+            <form action="{{ route('restore-articles', $article->id) }}" method='POST'>
+              @csrf
+              @method('PUT')
+              <button type="submit" class="btn btn-info btn-sm text-white">Restore</button>
+            </form>
+          </td>
+          @else
+          <td><a href="{{ route('articles.edit', $article->id) }}" class="btn btn-info btn-sm">Edit</a></td>
+          @endif
           </td>
           <td>
-            <button class="btn btn-danger btn-sm" onclick="handleDelete({{ $article->id }})">Delete</button>
+            <form action="{{ route('articles.destroy', $article->id) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type='submit' class="btn btn-danger btn-sm">
+                {{ $article->trashed() ? 'Delete' : 'Trash' }}
+              </button>
+            </form>
           </td>
         </tr>
         @endforeach

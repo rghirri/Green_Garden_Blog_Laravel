@@ -91,7 +91,7 @@ class ArticlesController extends Controller
         //
     }
 
-    /**
+     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -99,6 +99,55 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::withTrashed()->where('id', $id)->firstOrFail();
+
+        if($article->trashed()){
+            // delete old image by calling method in Post Model
+            $article->deleteImage();
+            // delete post
+            $article->forceDelete();
+            // flash message
+            session()->flash('success', 'Post deleted successfully');
+            // redirect user
+            return redirect('/trashed-articles');
+        }else
+        {
+            $article->delete();
+            // flash message
+            session()->flash('success', 'Article trashed successfully');
+            // redirect user
+            return redirect(route('articles.index'));
+        }
+
+    }
+
+    /**
+     * Display a list of all trashed posts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed(){
+        
+        $trashed = Article::onlyTrashed()->get();
+
+        return view('articles.index')->withArticles($trashed);
+    }
+
+    /**
+     * Restores trashed post.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        // Find Post
+        $article = Article::withTrashed()->where('id', $id)->firstOrFail();
+        // Restore Post
+        $article->restore();
+        // flash message
+        session()->flash('success', 'Article restored successfully');
+        // redirect user
+        return redirect(route('articles.index'));
+
     }
 }

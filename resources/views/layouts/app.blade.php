@@ -19,6 +19,21 @@
   @yield('css')
 </head>
 
+<style>
+.zoom {
+  transition: transform .2s;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(2.5);
+  /* IE 9 */
+  -webkit-transform: scale(2.5);
+  /* Safari 3-8 */
+  transform: scale(2.5);
+}
+</style>
+
 <body>
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
