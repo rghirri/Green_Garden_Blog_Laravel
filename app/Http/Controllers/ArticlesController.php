@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Articles\CreateArticleRequest;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Article;
 
 class ArticlesController extends Controller
@@ -103,7 +105,8 @@ class ArticlesController extends Controller
 
         if($article->trashed()){
             // delete old image by calling method in Post Model
-            $article->deleteImage();
+            Storage::delete($article->image_list);
+            Storage::delete($article->image_banner);
             // delete post
             $article->forceDelete();
             // flash message
