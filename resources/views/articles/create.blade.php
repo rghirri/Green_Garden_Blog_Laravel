@@ -33,22 +33,22 @@
       <!-- Display Image list -->
       @if(isset($article))
       <div class="form-group text-center">
-        <img src="{{ asset("/storage/".$article->image_file_list) }}" alt="" style="width:50%">
+        <img src="{{ asset("/storage/".$article->image_list) }}" alt="" style="width:50%">
       </div>
       @endif
       <div class="form-group">
-        <label for="image_file_list">Image List</label>
-        <input type="file" class="form-control" name="image_file_list" id="image_file_list">
+        <label for="image_list">Image List</label>
+        <input type="file" class="form-control" name="image_list" id="image_list">
       </div>
       <!-- Display Image banner -->
       @if(isset($article))
       <div class="form-group text-center">
-        <img src="{{ asset("/storage/".$article->image_file_banner) }}" alt="" style="width:50%">
+        <img src="{{ asset("/storage/".$article->image_banner) }}" alt="" style="width:50%">
       </div>
       @endif
       <div class="form-group">
-        <label for="image_file_banner">Image Banner</label>
-        <input type="file" class="form-control" name="image_file_banner" id="image_file_banner">
+        <label for="image_banner">Image Banner</label>
+        <input type="file" class="form-control" name="image_banner" id="image_banner">
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-success">

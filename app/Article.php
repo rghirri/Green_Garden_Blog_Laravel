@@ -8,7 +8,7 @@ class Article extends Model
 {
 
     protected $fillable = [
-        'title', 'content', 'published_at', 'image_file_list', 'image_file_banner'
+        'title', 'content', 'published_at', 'image_list', 'image_banner'
     ];
 
     

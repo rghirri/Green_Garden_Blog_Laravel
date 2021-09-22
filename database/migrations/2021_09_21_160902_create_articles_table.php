@@ -18,8 +18,8 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->timestamp('published_at')->nullable();
-            $table->string('image_file_list')->nullable();
-            $table->string('image_file_banner')->nullable();
+            $table->string('image_list')->nullable();
+            $table->string('image_banner')->nullable();
             $table->timestamps();
         });
     }
