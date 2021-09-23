@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Str;
+
 Use App\Tag;
 
 use App\Category;
@@ -15,6 +17,8 @@ use App\Category;
 class Article extends Model
 {
     use SoftDeletes;
+
+    const EXCERPT_LENGTH = 100;
 
     protected $fillable = [
         'title', 'content', 'published_at', 'image_list', 'image_banner', 'category_id'
@@ -49,5 +53,10 @@ class Article extends Model
     public function hasTag($tagId)
     {
         return in_array($tagId, $this->tags->pluck('id')->toArray());
+    }
+
+    public function excerpt()
+    {
+        return Str::limit($this->content, Article::EXCERPT_LENGTH);
     }
 }

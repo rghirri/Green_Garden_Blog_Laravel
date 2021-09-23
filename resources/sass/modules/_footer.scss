@@ -1,0 +1,59 @@
+/* footer styles begin */
+#login-footer {
+  @include atMedium {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+footer {
+  background-color: $footer-bg;
+  min-height: 280px;
+}
+
+.footer-nav {
+  text-align: center;
+  &__logo {
+    display: block;
+    margin: auto;
+  }
+  &__lists {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3rem 3rem auto;
+    @include atMedium {
+      flex-direction: row;
+    }
+  }
+  &__list {
+    margin-top: 10px;
+    @include atMedium {
+      margin: 0 10px;
+    }
+  }
+  &__link {
+    text-decoration: none;
+    color: $basic-text-color;
+    text-transform: uppercase;
+    font-size: 14px;
+    &:hover {
+      color: $light-green;
+    }
+  }
+  &__copy {
+    display: block;
+    font-family: basic-font;
+    text-transform: capitalize;
+    font-size: 11px;
+    color: $basic-text-color;
+    padding-bottom: 20px;
+  }
+}
+
+/* footer styles end */

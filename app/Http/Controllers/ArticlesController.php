@@ -109,7 +109,7 @@ class ArticlesController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         // get all form data
-        $data = $request->all(['title', 'content', 'published_at', 'image_list', 'image_banner', 'category']);
+        $data = $request->all(['title', 'content', 'published_at', 'category']);
 
         // check if new image
         if ($request->hasFile('image_list')){

@@ -1,0 +1,93 @@
+@import "mixins";
+@import "variables";
+/* General styles begin */
+/* ----------------------------------------------- */
+/* BASIC SETUP begin */
+/* ----------------------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+// #content {
+//   min-height: 100vh;
+// }
+
+/* ----------------------------------------------- */
+/* BASIC SETUP end */
+/* ----------------------------------------------- */
+
+/* Font Begin */
+
+@font-face {
+  font-family: hero-font;
+  src: url(/vendor/font/Viaoda_Libre/ViaodaLibre-Regular.ttf);
+}
+
+@font-face {
+  font-family: basic-font;
+  src: url(/vendor/font/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: meta-font;
+  src: url(/vendor/font/Roboto/Roboto-BoldItalic.ttf);
+}
+
+h1 {
+  font-family: hero-font;
+  text-transform: capitalize;
+  font-size: 20px;
+  color: $text-white;
+  @include atSmall {
+    font-size: 45px;
+  }
+}
+
+h2 {
+  font-family: basic-font;
+  text-transform: capitalize;
+  font-size: 16px;
+  color: $light-green;
+  @include atMedium {
+    font-size: 25px;
+  }
+}
+
+#meta-data {
+  font-family: meta-font;
+  text-transform: capitalize;
+  font-size: 11px;
+  color: $dark-green;
+  @include atMedium {
+    font-size: 13px;
+  }
+}
+
+p {
+  font-family: basic-font;
+  font-size: 14px;
+  line-height: 1.6;
+  color: $basic-text-color;
+  @include atMedium {
+    font-size: 16px;
+  }
+}
+
+/* Font End */
+
+/* General styles end */
+
+/* header styles start */
+
+/* Navbar styles begin*/

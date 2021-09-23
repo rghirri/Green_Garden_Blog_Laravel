@@ -24,7 +24,7 @@ class UpdateArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'          => 'required|unique:articles',
+            'title'          => 'required',
             'content'        => 'required',
             'image_list'     => 'image',
             'image_banner'   => 'image',

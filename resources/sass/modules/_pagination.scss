@@ -1,0 +1,17 @@
+#pagination-list {
+  display: flex;
+  justify-content: center;
+}
+
+.page-link {
+  color: $light-green;
+}
+
+.page-link:hover {
+  color: $basic-text-color;
+}
+
+.page-item.active .page-link {
+  background-color: #80b435;
+  border-color: #80b435;
+}
