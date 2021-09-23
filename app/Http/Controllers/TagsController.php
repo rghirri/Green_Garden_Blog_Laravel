@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\Tags\CreateTagRequest;
 
-use App\Http\Requests\Categories\UpdateCategoriesRequest;
+use App\Http\Requests\Tags\UpdatesTagsRequest;
 
-use App\Category;
+use App\Tag;
 
-class CategoriesController extends Controller
+class TagsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('categories.index')->with('categories', Category::all());
+        return view('tags.index')->with('tags', Tag::all());
     }
 
     /**
@@ -29,7 +29,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('tags.create');
     }
 
     /**
@@ -38,18 +38,18 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateCategoryRequest $request)
+    public function store(CreateTagRequest $request)
     {
         // Store category to database
-        Category::create([
+        Tag::create([
             'name' => $request->name
         ]);
 
         // Add flash message
-        session()->flash('success', "Category $request->name Added Successfuly");
+        session()->flash('success', "Tag $request->name Added Successfuly");
 
         // Redirect page
-        return redirect(route('categories.index'));
+        return redirect(route('tags.index'));
 
     }
 
@@ -70,9 +70,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Tag $tag)
     {
-        return view('categories.create')->with('category', $category);
+        return view('tags.create')->with('tag', $tag);
     }
 
     /**
@@ -82,18 +82,18 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoriesRequest $request, Category $category)
+    public function update(UpdatesTagsRequest $request, Tag $tag)
     {
         // Update category in database
-        $category->update([
+        $tag->update([
             'name' => $request->name
         ]);
 
         // Add flash message
-        session()->flash('success', 'Category Updated Successfuly');
+        session()->flash('success', 'Tag Updated Successfuly');
 
         // Redirect page
-        return redirect(route('categories.index'));
+        return redirect(route('tags.index'));
     }
 
     /**
@@ -102,26 +102,27 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Tag $tag)
     {
-        // check if category is associated with a post
-        if ($category->articles->count() > 0)
+        // check if tag is associated with a post
+        if ($tag->articles->count() > 0)
         {
-            session()->flash('error', 'Category cannot be deleted because is has some post.');
+            session()->flash('error', 'Tag cannot be deleted, because it is associated with some posts.');
 
             return redirect()->back(); 
         }
+
          // Delete category from database
-         $category->delete();
+         $tag->delete();
 
          // Store category name is session variable
 
         // $category_name = session()->put('category_name', 'cooking');
 
         // Add flash message
-        session()->flash('success', "Category $category->name was deleted successfully");
+        session()->flash('success', "Tag $tag->name was deleted successfully");
 
         // Redirect page
-        return redirect(route('categories.index'));
+        return redirect(route('tags.index'));
     }
 }

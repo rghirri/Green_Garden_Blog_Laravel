@@ -9,8 +9,18 @@ use App\Http\Requests\Articles\UpdateArticleRequest;
 
 use App\Article;
 
+use App\Category;
+
+use App\Tag;
+
 class ArticlesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('verifyCategoriesCount')->only(['create', 'store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +38,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create')->with('categories', Category::all())->with('tags', Tag::all());
     }
 
     /**
@@ -45,13 +55,20 @@ class ArticlesController extends Controller
         $image_list = $request->image_list->store('articles/list');
         $image_banner = $request->image_banner->store('articles/banner');
         // create the article
-        Article::create([
+        $article = Article::create([
             'title'         =>  $request->title,
             'content'       =>  $request->content,
             'published_at'  =>  $request->published_at,
             'image_list'    =>  $image_list,
-            'image_banner'  =>  $image_banner
+            'image_banner'  =>  $image_banner,
+            'category_id'   =>  $request->category
         ]);
+
+        if ($request->tags)
+        {
+            $article->tags()->attach($request->tags);
+        }
+
         // flash message
         session()->flash('success', "Article $request->title created successfully");
         // redirect user
@@ -77,7 +94,7 @@ class ArticlesController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.create')->with('article', $article);
+        return view('articles.create')->with('article', $article)->with('categories', Category::all())->with('tags', Tag::all());
     }
 
     /**
@@ -90,7 +107,7 @@ class ArticlesController extends Controller
     public function update(UpdateArticleRequest $request, Article $article)
     {
         // get all form data
-        $data = $request->all(['title', 'content', 'published_at']);
+        $data = $request->all(['title', 'content', 'published_at', 'image_list', 'image_banner', 'category']);
 
         // check if new image
         if ($request->hasFile('image_list')){
@@ -116,6 +133,12 @@ class ArticlesController extends Controller
        $data['image_banner'] = $image_banner;
       }
        
+      // add selected tags
+
+      if ($request->tags)
+      {
+          $article->tags()->sync($request->tags);
+      }
        
         // update attributes
         $article->update($data);

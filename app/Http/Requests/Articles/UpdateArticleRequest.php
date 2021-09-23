@@ -27,7 +27,8 @@ class UpdateArticleRequest extends FormRequest
             'title'          => 'required|unique:articles',
             'content'        => 'required',
             'image_list'     => 'image',
-            'image_banner'   => 'image'
+            'image_banner'   => 'image',
+            'category'       => 'required' 
         ];
     }
 }

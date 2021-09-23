@@ -40,10 +40,10 @@
             {{ $article->title }}
           </td>
           <td>
-            Category
+            <a href="{{ route('categories.edit', $article->category->id) }}">{{ $article->category->name }}</a>
           </td>
           <td>
-            Publish Status button
+            {{ $article->published_at ? 'Published' : 'Unpublished' }}
           </td>
           <td>
             @if($article->trashed())

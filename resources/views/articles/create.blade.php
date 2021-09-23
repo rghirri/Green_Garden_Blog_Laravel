@@ -50,6 +50,40 @@
         <label for="image_banner">Image Banner</label>
         <input type="file" class="form-control" name="image_banner" id="image_banner">
       </div>
+      <!-- Categories List -->
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select name="category" id="category" class="form-control">
+          @foreach($categories as $category)
+          <option value="{{ $category->id }}" @if(isset($article)) @if($category->id == $article->category_id)
+            selected
+            @endif
+            @endif
+            >
+            {{ $category->name }}
+          </option>
+          @endforeach
+        </select>
+      </div>
+
+      <!-- Tags List -->
+      @if($tags->count() > 0)
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        <select name="tags[]" id="tags" class="tags-selector form-control" multiple>
+          @foreach($tags as $tag)
+          <option value="{{ $tag->id }}" @if(isset($article)) @if($article->hasTag($tag->id))
+            selected
+            @endif
+            @endif
+            >
+            {{ $tag->name }}
+          </option>
+          @endforeach
+        </select>
+      </div>
+      @endif
+
       <div class="form-group">
         <button type="submit" class="btn btn-success">
           {{ isset($article) ? 'Update Article' : 'Create Article' }}
@@ -66,9 +100,15 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+// date picker
 flatpickr('#published_at', {
   enableTime: true,
   enableSeconds: true
+});
+
+// tag select
+$(document).ready(function() {
+  $('.tags-selector').select2();
 });
 </script>
 @endsection

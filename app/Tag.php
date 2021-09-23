@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Article;
 
-class Category extends Model
+class Tag extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,6 @@ class Category extends Model
 
     public function articles()
     {
-        return $this->hasMany(Article::class);  // Category has many articles
+        return $this->belongsToMany(Article::class); // tag has many articles
     }
-
 }
