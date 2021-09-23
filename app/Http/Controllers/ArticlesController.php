@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests\Articles\CreateArticleRequest;
 
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Articles\UpdateArticleRequest;
+
 
 use App\Article;
 
@@ -76,9 +75,9 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        return view('articles.create')->with('article', $article);
     }
 
     /**
@@ -88,9 +87,43 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        // get all form data
+        $data = $request->all(['title', 'content', 'published_at']);
+
+        // check if new image
+        if ($request->hasFile('image_list')){
+        // upload it
+        $image_list = $request->image_list->store('articles/list');
+        // delete previus image
+        $article->deleteImageList();
+
+        // save image
+        $data['image_list'] = $image_list;
+       }
+
+       // check if new image
+       if ($request->hasFile('image_banner')){
+
+       // upload it
+       $image_banner = $request->image_banner->store('articles/banner');
+
+       // delete previus image
+       $article->deleteImageBanner();
+
+       // save image
+       $data['image_banner'] = $image_banner;
+      }
+       
+       
+        // update attributes
+        $article->update($data);
+
+        // flash message
+        session()->flash('success', 'Article updated successfully');
+        // redirect user
+        return redirect(route('articles.index'));
     }
 
      /**
@@ -105,8 +138,8 @@ class ArticlesController extends Controller
 
         if($article->trashed()){
             // delete old image by calling method in Post Model
-            Storage::delete($article->image_list);
-            Storage::delete($article->image_banner);
+            $article->deleteImageList();
+            $article->deleteImageBanner();
             // delete post
             $article->forceDelete();
             // flash message

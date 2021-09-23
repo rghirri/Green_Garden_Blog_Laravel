@@ -72,7 +72,7 @@
       </tbody>
     </table>
     @else
-    <h3 class="text-center">No Posts</h3>
+    <h3 class="text-center">No Articles</h3>
     @endif
   </div>
 </div>

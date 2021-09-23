@@ -21,7 +21,7 @@
             {{ $category->name }}
           </td>
           <td>
-            {{ $category->articles->count() }}
+
           </td>
           <td>
             <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">
