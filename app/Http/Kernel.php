@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 use App\Http\Middleware\VerifyCategoriesCount;
 
+use App\Http\Middleware\VerifyIsAdmin;
+
 class Kernel extends HttpKernel
 {
     /**
@@ -63,6 +65,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verifyCategoriesCount' => VerifyCategoriesCount::class,
+        'admin' => VerifyIsAdmin::class
     ];
 
     /**
