@@ -18,5 +18,22 @@ class ArticlesController extends Controller
         return view('blog.show')->with('article', $article);
     }
 
+    public function category(Category $category)
+    {
+        return view('blog.category')
+        ->with('category', $category)
+        ->with('articles', $category->articles()->searched()->simplePaginate(3))
+        ->with('categories', Category::all())
+        ->with('tags', Tag::all());
+    }
+
+    public function tag(Tag $tag)
+    {
+        return view('blog.tag')
+        ->with('tag', $tag)
+        ->with('articles', $tag->articles()->searched()->simplePaginate(3))
+        ->with('categories', Category::all())
+        ->with('tags', Tag::all());
+    }
 
 }

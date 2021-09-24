@@ -64,6 +64,16 @@ h2 {
   }
 }
 
+h6 {
+  font-family: basic-font;
+  text-transform: capitalize;
+  font-size: 12px;
+  color: $light-green;
+  @include atMedium {
+    font-size: 18px;
+  }
+}
+
 #meta-data {
   font-family: meta-font;
   text-transform: capitalize;

@@ -63,7 +63,8 @@ class ArticlesController extends Controller
             'published_at'  =>  $request->published_at,
             'image_list'    =>  $image_list,
             'image_banner'  =>  $image_banner,
-            'category_id'   =>  $request->category
+            'category_id'   =>  $request->category,
+            'user_id'       =>  auth()->user()->id   
         ]);
 
         if ($request->tags)
@@ -72,7 +73,7 @@ class ArticlesController extends Controller
         }
 
         // flash message
-        session()->flash('success', "Article $request->title created successfully");
+        session()->flash('success', "Article ( $request->title ) created successfully");
         // redirect user
         return redirect(route('articles.index'));
     }

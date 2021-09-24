@@ -26,7 +26,7 @@ class Article extends Model
     const EXCERPT_LENGTH = 100;
 
     protected $fillable = [
-        'title', 'content', 'published_at', 'image_list', 'image_banner', 'category_id'
+        'title', 'content', 'published_at', 'image_list', 'image_banner', 'category_id', 'user_id'
     ];
 
     public function deleteImageList()
@@ -64,6 +64,32 @@ class Article extends Model
     {
         return Str::limit($this->content, Article::EXCERPT_LENGTH);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
+    public function scopePublished($query)
+    {
+        return $query->where('published_at', '<=', now());
+    }
+
+
+    public function scopeSearched($query)
+    {
+        $search = request()->query('search');
+
+        if (!$search) 
+        {
+            return $query->published();
+        }
+
+        return $query->published()->where('title', 'LIKE', "%{$search}%");
+
+    }
+
 
     
 }
