@@ -18,6 +18,11 @@ class Article extends Model
 {
     use SoftDeletes;
 
+    protected $dates = [
+        'published_at'
+    ];
+
+
     const EXCERPT_LENGTH = 100;
 
     protected $fillable = [
@@ -59,4 +64,6 @@ class Article extends Model
     {
         return Str::limit($this->content, Article::EXCERPT_LENGTH);
     }
+
+    
 }
