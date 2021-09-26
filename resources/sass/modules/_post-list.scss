@@ -1,15 +1,15 @@
 .post-list {
   &__image {
-    padding-top: 10px;
-    max-width: 80%;
-    height: auto;
-
+    width: 363px; 
+    height: 225px; 
+    object-fit:cover;
+  }
 
     @include atSmall {
       padding-top: 0;
     }
   }
-}
+
 
 .input-group-addon{
   overflow: hidden;

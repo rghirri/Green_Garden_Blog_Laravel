@@ -54,6 +54,17 @@ footer {
     color: $basic-text-color;
     padding-bottom: 20px;
   }
+
+  &__theme {
+    display: block;
+    font-family: basic-font;
+    text-transform: capitalize;
+    font-size: 10px;
+    color: $basic-text-color;
+    padding-bottom: 20px;
+    font-weight: 700;
+    word-spacing: 2px;
+  }
 }
 
 /* footer styles end */

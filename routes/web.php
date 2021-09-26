@@ -19,14 +19,14 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 
 Route::get('blog/articles/{article}  ', [ArticlesController::class,'show'])->name('blog.show');
 
-Route::get('blog/categories/{category}', [PostsController::class,'category'])->name('blog.category');
+Route::get('blog/categories/{category}', [ArticlesController::class,'category'])->name('blog.category');
 
-Route::get('blog/tags/{tag}', [PostsController::class,'tag'])->name('blog.tag');
+Route::get('blog/tags/{tag}', [ArticlesController::class,'tag'])->name('blog.tag');
 
 
 // BACK END
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::middleware(['auth'])->group(function ()
 {

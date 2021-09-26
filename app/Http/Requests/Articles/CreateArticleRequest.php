@@ -26,8 +26,8 @@ class CreateArticleRequest extends FormRequest
         return [
             'title'          => 'required|unique:articles',
             'content'        => 'required',
-            'image_list'     => 'required|image',
-            'image_banner'   => 'required|image',
+            'image_list'     => 'required|mimes:jpeg,png,jpg,gif|max:2048|dimensions:max-width=363,min-height=250',
+            'image_banner'   => 'required|mimes:jpeg,png,jpg,gif|max:2048|dimensions:max-width=1300,min-height=260',
             'category'       => 'required'    
         ];
     }

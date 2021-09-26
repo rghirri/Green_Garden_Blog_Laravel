@@ -32,7 +32,7 @@ Green Garden Blog
           <div class="row gap-y">
             <div class="row pt-5">
               @forelse($articles as $article)
-              <div class="col-md-6">
+              <div class="col-md-6" style="display:table-cell;">
                 <div class="row justify-content-center">
                   <img class="post-list__image" src="{{ asset("/storage/".$article->image_list) }}" alt=""
                     class="img-fluid" />
@@ -40,9 +40,21 @@ Green Garden Blog
                     <div class="d-flex flex-column">
                       <h2> {{ $article->title }}</h2>
                       <p id="meta-data"><time>{{ $article->published_at }}</time>
-                        <!-- categories -->
-                        <span> | Categories:
-                          {{ $article->category->name }} </span>
+
+                        <!-- Author -->
+                        <span> | Author:
+                          {{ $article->user->name }} </span>
+                        <!-- tagss -->
+                        <span>
+                          <!-- categories -->
+                          <span> | Categories:
+                            {{ $article->category->name }} </span>
+                          <!-- tagss -->
+                          <span> | Tags:
+                            @foreach($article->tags as $tag)
+                            {{ $tag->name }}
+                            @endforeach
+                          </span>
                       </p>
                       <p>
                         <!-- Content excerpt -->
@@ -52,15 +64,15 @@ Green Garden Blog
                     <a href="{{ route('blog.show', $article->id) }}"><button class="btn">Read More</button></a>
                   </div>
                 </div>
+                <hr>
               </div>
               @empty
               <p class="text-center">No Results Found For Query : <strong>{{ request()->query('search') }}</strong></p>
               @endforelse
             </div>
           </div>
-
           <!-- Post list Pagination begin -->
-          <nav aria-label="page" id="pagination-list" class="my-5">
+          <nav aria-label="page" id="pagination-list" class="my-md-5">
             <ul class=" text-center pagination pt-5">
               {{ $articles->appends(['search' => request()->query('search')])->links() }}
             </ul>

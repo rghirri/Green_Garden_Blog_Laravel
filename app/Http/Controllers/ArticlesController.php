@@ -6,9 +6,6 @@ use App\Http\Requests\Articles\CreateArticleRequest;
 
 use App\Http\Requests\Articles\UpdateArticleRequest;
 
-
-
-
 use App\Article;
 
 use App\Category;
@@ -21,6 +18,8 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->middleware('verifyCategoriesCount')->only(['create', 'store']);
+
+        $this->middleware(['auth', 'verify'])->only(['create', 'store']);
     }
 
     /**

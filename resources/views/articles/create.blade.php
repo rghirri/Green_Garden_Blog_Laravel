@@ -32,24 +32,40 @@
       </div>
       <!-- Display Image list -->
       @if(isset($article))
-      <div class="form-group text-center">
-        <img src="{{ asset("/storage/".$article->image_list) }}" alt="" style="width:50%">
+      <div class="form-group mt-5">
+        <div class="text-center">
+          <img src="{{ asset("/storage/".$article->image_list) }}" alt="" style="width:50%">
+        </div>
+        <label for="image_list">Image List</label>
+        <input class="mt-3" type="file" class="form-control" name="image_list" id="image_list"
+          aria-describedby="imageHelp" value="{{ asset("/storage/".$article->image_list) }}">
+        <small id="imageHelp" class="font-weight-bolder">Image dimensions need to be 1300x269px.</small>
       </div>
-      @endif
+      @else
       <div class="form-group">
         <label for="image_list">Image List</label>
         <input type="file" class="form-control" name="image_list" id="image_list">
-      </div>
-      <!-- Display Image banner -->
-      @if(isset($article))
-      <div class="form-group text-center">
-        <img src="{{ asset("/storage/".$article->image_banner) }}" alt="" style="width:50%">
+        <small id="imageHelp" class="font-weight-bolder">Image dimensions need to be 363x255px.</small>
       </div>
       @endif
+      <!-- Display Image banner -->
+      @if(isset($article))
+      <div class="form-group mt-5">
+        <div class="text-center">
+          <img class="text-center" src="{{ asset("/storage/".$article->image_banner) }}" alt="" style="width:50%">
+        </div>
+        <label for="image_list">Image Banner</label>
+        <input class="mt-3" type="file" class="form-control" name="image_banner" id="image_banner"
+          aria-describedby="imageHelp" value="{{ asset("/storage/".$article->image_banner) }}">
+        <small id="imageHelp" class="font-weight-bolder">Image dimensions need to be 1300x269px.</small>
+      </div>
+      @else
       <div class="form-group">
         <label for="image_banner">Image Banner</label>
-        <input type="file" class="form-control" name="image_banner" id="image_banner">
+        <input type="file" class="form-control" name="image_banner" id="image_banner" aria-describedby="imageHelp">
+        <small id="imageHelp" class="font-weight-bolder">Image dimensions need to be 1300x269px.</small>
       </div>
+      @endif
       <!-- Categories List -->
       <div class="form-group">
         <label for="category">Category</label>

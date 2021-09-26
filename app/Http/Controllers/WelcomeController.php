@@ -19,7 +19,7 @@ class WelcomeController extends Controller
         return view('welcome')
         ->with('categories', Category::all())
         ->with('tags', Tag::all())
-        ->with('articles', Article::paginate(4));
+        ->with('articles', Article::searched()->paginate(4));
     }
 
 }

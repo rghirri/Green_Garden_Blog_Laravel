@@ -6,7 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+use App\Article;
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -42,8 +44,8 @@ class User extends Authenticatable
         return $this->role == 'admin';
     }
 
-    // public function posts()
-    // {
-    //     return $this->hasMany(Post::class);
-    // }
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }
