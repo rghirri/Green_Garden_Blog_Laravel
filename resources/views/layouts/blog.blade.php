@@ -34,6 +34,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav text-uppercase">
+          @guest
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{ route('login') }}">Login</a>
+          </li>
+
+          @else
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">home</a>
           </li>
@@ -41,8 +50,9 @@
             <a class="nav-link " href="/contact.php">contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}"><button class="btn text-uppercase">log in</button></a>
+            <a href="{{ route('login') }}"><button class="btn text-uppercase">{{ __('Admin') }}</button></a>
           </li>
+          @endguest
         </ul>
       </div>
     </div>
@@ -61,9 +71,6 @@
       <ul class="footer-nav__lists m-auto">
         <li class=" footer-nav__list">
           <a class="footer-nav__link" aria-current="page" href="{{ route('welcome') }}">home</a>
-        </li>
-        <li class="footer-nav__list">
-          <a class="footer-nav__link" href="#">contact</a>
         </li>
         <li class="footer-nav__list">
           <a class="footer-nav__link" href="{{ route('login') }}">login</a>

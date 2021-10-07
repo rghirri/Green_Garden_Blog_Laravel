@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Blog\ArticlesController;
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

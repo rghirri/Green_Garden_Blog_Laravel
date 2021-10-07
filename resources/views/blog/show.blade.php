@@ -52,22 +52,8 @@ Green Garden Blog | {{ $article->title }}
                   <a href="{{ route('welcome') }}"><button class="btn">Back to Previous</button></a>
                 </div>
 
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox"></div>
+              </div>
 
-              </div>
-              <!-- Comments -->
-              <div class="container">
-                <div id="hyvor-talk-view"></div>
-                <script type="text/javascript">
-                var HYVOR_TALK_WEBSITE = 5178;
-                var HYVOR_TALK_CONFIG = {
-                  url: "{{ config('app.url') }}blog/articles/{{ $article->id }}",
-                  id: "{{ $article->id }}"
-                };
-                </script>
-                <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed.js"></script>
-              </div>
             </div>
           </div>
         </div>
